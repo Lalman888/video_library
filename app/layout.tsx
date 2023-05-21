@@ -4,9 +4,10 @@ import { Metadata } from "next"
 import { siteConfig } from "@/config/site"
 import { fontSans } from "@/lib/fonts"
 import { cn } from "@/lib/utils"
-import { SiteHeader } from "@/components/site-header"
+// import { SiteHeader } from "@/components/site-header"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme-provider"
+import { ReactQueryProvider } from "@/components/ReactQueryProvider"
 
 export const metadata: Metadata = {
   title: {
@@ -18,6 +19,7 @@ export const metadata: Metadata = {
     { media: "(prefers-color-scheme: light)", color: "white" },
     { media: "(prefers-color-scheme: dark)", color: "black" },
   ],
+  viewport: "minimum-scale=1,initial-scale=1,width=device-width",
   icons: {
     icon: "/favicon.ico",
     shortcut: "/favicon-16x16.png",
@@ -32,23 +34,25 @@ interface RootLayoutProps {
 export default function RootLayout({ children }: RootLayoutProps) {
   return (
     <>
+    <ReactQueryProvider>
       <html lang="en" suppressHydrationWarning>
         <head />
         <body
           className={cn(
-            "min-h-screen bg-background font-sans antialiased",
+            "min-h-screen bg-purple-600 font-sans antialiased",
             fontSans.variable
           )}
         >
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <div className="relative flex min-h-screen flex-col">
-              <SiteHeader />
+              {/* <SiteHeader /> */}
               <div className="flex-1">{children}</div>
             </div>
             <TailwindIndicator />
           </ThemeProvider>
         </body>
       </html>
+      </ReactQueryProvider>
     </>
   )
 }
