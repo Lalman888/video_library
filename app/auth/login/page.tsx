@@ -11,10 +11,8 @@ import { useRouter } from "next/router"
 
 const Login = () => {
   const [Login, setLogin] = useState({
-    username: "",
     password: "",
     email: "",
-    passwordConfirmation: "",
   })
 
   const {toast} = useToast()

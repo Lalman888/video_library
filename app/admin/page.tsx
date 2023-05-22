@@ -1,15 +1,23 @@
 "use client"
 
-import React from "react"
+import React, { useEffect } from "react"
 import Link from "next/link"
 import { useUser } from "@/context/user"
+import UploadVideo from "@/components/admin/UploadVideo"
 
 const Admin = () => {
-  const { user, refetch } = useUser()
+  // const { user, refetch } = useUser()
+  let user = ''
+  useEffect(() => {
+    if(localStorage?.getItem('userd ')){
+      user = localStorage?.getItem('userd ') || ''
+      console.log('userd : ', JSON.parse(user))
+    }
+  }, [])
   return (
     <>
       <div>
-        {!user ? (
+        {user?.length > 0 ? (
           <div className="flex gap-x-4 ">
             <Link href="/login" passHref>
               <p>Login</p>
@@ -23,6 +31,7 @@ const Admin = () => {
             <Link href="/logout" passHref>
               <p>Logout</p>
             </Link>
+            <UploadVideo />
           </div>
         )}
       </div>

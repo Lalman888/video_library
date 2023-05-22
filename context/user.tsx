@@ -1,4 +1,5 @@
-import { createContext,ReactNode, useContext } from "react"
+"use client"
+import { createContext,ReactNode, use, useContext, useEffect } from "react"
 import { getUser } from "@/api"
 import { QueryKeys } from "@/types"
 import { useQuery,RefetchOptions,RefetchQueryFilters } from "@tanstack/react-query"
@@ -13,11 +14,12 @@ const userContext = createContext<{user: User;
 
 function UserContextProvider({ children }: { children: ReactNode }) {
   // @ts-ignore
-  const { data, isLoading, refetch } = useQuery(QueryKeys.user, getUser)
+  const { data, isLoading, refetch} = useQuery(QueryKeys.user, getUser)
+
   return (
   // @ts-ignore
     <userContext.Provider value={{user: data, refetch }}>
-      {isLoading ? <div>loading...</div> : children}
+      {children}
     </userContext.Provider>
   )
 }

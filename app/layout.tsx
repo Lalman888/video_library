@@ -45,16 +45,19 @@ export default function RootLayout({ children }: RootLayoutProps) {
             fontSans.variable
           )}
         >
-          <UserContextProvider>
+          {/* <UserContextProvider> */}
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <div className="relative flex min-h-screen flex-col">
               {/* <SiteHeader /> */}
+              <UserContextProvider>
+
               <div className="flex-1">{children}</div>
               <Toaster />
+              </UserContextProvider>
             </div>
             <TailwindIndicator />
           </ThemeProvider>
-          </UserContextProvider>
+          {/* </UserContextProvider> */}
         </body>
       </html>
       </ReactQueryProvider>

@@ -21,13 +21,25 @@ export function loginUser(data: {
     email: string
     password: string
 }){
-   return axios.post(`${authBase}/login`, data).then((res) => res.data)
+   return axios.post(authBase, data).then((res) => {
+      // console.log('login: ',res)
+      localStorage.setItem('accessToken', res.data.token)
+      getUser()
+      return res.data
+   })
 }
 
 export function getUser(){
   return axios.get(userBase,{
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+    },
     withCredentials: true
-  }).then((res) => res.data)
+  }).then((res) => {
+    // console.log('res: ',res)
+    localStorage.setItem('userd ', JSON.stringify(res.data))
+    return res.data
+  })
   .catch((err) => {
     return null;
   })
