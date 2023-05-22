@@ -5,6 +5,7 @@ const base = process.env.NEXT_PUBLIC_API_ENDPOINT
 const userBase = `${base}/api/users`
 
 const authBase = `${base}/api/auth`
+const videoBase = `${base}/api/videos`
 
 export function registerUser(data: {
   username: string
@@ -44,3 +45,44 @@ export function getUser(){
     return null;
   })
 }
+
+export function uploadVideo({
+  formData, config
+} : {formData: FormData, config: {onUploadProgress: (progressEvent: any) => void}}){
+  return axios.post(videoBase, formData, {
+    withCredentials: true,
+    ...config,
+    headers: {
+      Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+      "Content-Type": "multipart/form-data",
+    }
+  }).then((res) => {
+    console.log('res: upload ',res)
+    return res.data
+  })
+}
+
+export function updateVideo({videoId,...payload} : {
+  videoId: string
+  title: string
+  description: string
+  published: boolean
+}){
+  return axios.patch(`${videoBase}/${videoId}`, payload, {
+    withCredentials: true,
+  }).then((res) => {
+    console.log('res: update ',res)
+    return res.data
+  }
+  )
+}
+
+export function getVideo(){
+  return axios.get(videoBase,{
+    withCredentials: true,
+  }).then((res) => {
+    // console.log('res: videos ',res)
+    return res.data
+  }
+  )
+} 
