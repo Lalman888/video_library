@@ -14,7 +14,7 @@ export const isScreenRecordingEnabled = async (): Promise<boolean> => {
   
       return isScreenRecordingEnabled;
     } catch (error) {
-      console.error('Error checking screen recording:', error);
+      //console.error('Error checking screen recording:', error);
       return false;
     }
   };

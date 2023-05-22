@@ -5,7 +5,7 @@ import { getVideo, updateVideo, uploadVideo } from "@/api"
 import { Video } from "@/types"
 import { useMutation } from "@tanstack/react-query"
 import { AxiosError } from "axios"
-
+import { useRouter } from "next/navigation"
 import {
   Dialog,
   DialogContent,
@@ -20,7 +20,7 @@ const UploadVideo = () => {
     onUploadProgress: (progressEvent: any) => {
       const { loaded, total } = progressEvent
       let percent = Math.floor((loaded * 100) / total)
-      console.log("percent: ", percent)
+      //console.log("percent: ", percent)
       setProgress(percent)
     },
   }
@@ -96,11 +96,13 @@ export const EditVideoForm = ({ videoId }: { videoId: string }) => {
     description: "",
     published: false,
   })
+  const router = useRouter()
   type input = Parameters<typeof updateVideo>["0"]
 
   const mutation = useMutation<Video, AxiosError, input>(updateVideo, {
     onSuccess: (data) => {
-      console.log("data: edit form ", data)
+      //console.log("data: edit form ", data)
+      router.push(`/`)
     },
   })
 

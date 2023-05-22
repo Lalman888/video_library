@@ -11,7 +11,7 @@ const Admin = () => {
   useEffect(() => {
     if(localStorage?.getItem('userd ')){
       user = localStorage?.getItem('userd ') || ''
-      console.log('userd : ', JSON.parse(user))
+      //console.log('userd : ', JSON.parse(user))
     }
   }, [])
   return (

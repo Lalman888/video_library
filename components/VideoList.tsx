@@ -15,7 +15,7 @@ const VideoList = () => {
 
     if(isLoading) return <div>Loading...</div>
     if(isError) return <div>Error fetching videos</div>
-    console.log('video list ',data);
+    //console.log('video list ',data);
   return (
     <div>
  Video     

@@ -6,7 +6,7 @@ import { useMutation } from "@tanstack/react-query"
 import { AxiosError } from "axios"
 import Head from "next/head"
 import { useToast } from "@/components/ui/use-toast"
-import { useRouter } from "next/router"
+import { useRouter } from "next/navigation"
 
 
 const Login = () => {
@@ -16,7 +16,7 @@ const Login = () => {
   })
 
   const {toast} = useToast()
-  // const router = useRouter()
+  const router = useRouter()
 
   const mutation = useMutation<
     string,
@@ -27,8 +27,8 @@ const Login = () => {
       toast({
         description: "Login successfully"
       })
-      console.log(data,'Login')
-      // router.push('/')
+      //console.log(data,'Login')
+      router.push('/')
     },
     onError: () => {
       toast({

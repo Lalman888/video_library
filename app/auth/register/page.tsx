@@ -33,7 +33,7 @@ const Register = () => {
       toast({
         description: "Registered successfully"
       })
-      console.log(data,'register')
+      //console.log(data,'register')
       // router.push('/')
     },
     onError: () => {
