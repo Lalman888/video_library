@@ -11,6 +11,7 @@ function WatchVideoPage() {
         width="800px"
         height="auto"
         controls
+        controlsList="nodownload" 
         autoPlay
         id="video-player"
       />
