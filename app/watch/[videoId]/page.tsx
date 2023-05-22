@@ -1,4 +1,5 @@
 "use client"
+import Link from "next/link";
 import { useRouter,useSearchParams,usePathname } from "next/navigation";
 
 function WatchVideoPage() {
@@ -6,6 +7,8 @@ function WatchVideoPage() {
 
   return (
     <div>
+      <Link href="/"><p>Back to home</p></Link>
+      <h1 className="mt-3 pt-1">Watch Video</h1>
       <video
         src={`${process.env.NEXT_PUBLIC_API_ENDPOINT}/api/videos/${pathname.split('/')[2]}`}
         width="800px"

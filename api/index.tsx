@@ -23,7 +23,7 @@ export function loginUser(data: {
     password: string
 }){
    return axios.post(authBase, data).then((res) => {
-      // console.log('login: ',res)
+      // //console.log('login: ',res)
       localStorage.setItem('accessToken', res.data.token)
       getUser()
       return res.data
@@ -37,7 +37,7 @@ export function getUser(){
     },
     withCredentials: true
   }).then((res) => {
-    // console.log('res: ',res)
+    // //console.log('res: ',res)
     localStorage.setItem('userd ', JSON.stringify(res.data))
     return res.data
   })
@@ -57,7 +57,7 @@ export function uploadVideo({
       "Content-Type": "multipart/form-data",
     }
   }).then((res) => {
-    console.log('res: upload ',res)
+    //console.log('res: upload ',res)
     return res.data
   })
 }
@@ -70,8 +70,11 @@ export function updateVideo({videoId,...payload} : {
 }){
   return axios.patch(`${videoBase}/${videoId}`, payload, {
     withCredentials: true,
+    headers : {
+      Authorization: `Bearer ${localStorage.getItem('accessToken')}`
+    }
   }).then((res) => {
-    console.log('res: update ',res)
+    //console.log('res: update ',res)
     return res.data
   }
   )
@@ -81,7 +84,7 @@ export function getVideo(){
   return axios.get(videoBase,{
     withCredentials: true,
   }).then((res) => {
-    // console.log('res: videos ',res)
+    // //console.log('res: videos ',res)
     return res.data
   }
   )
