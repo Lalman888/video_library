@@ -8,6 +8,8 @@ import { cn } from "@/lib/utils"
 import { TailwindIndicator } from "@/components/tailwind-indicator"
 import { ThemeProvider } from "@/components/theme-provider"
 import { ReactQueryProvider } from "@/components/ReactQueryProvider"
+import { Toaster } from "@/components/ui/toaster"
+import { UserContextProvider } from "@/context/user"
 
 export const metadata: Metadata = {
   title: {
@@ -39,17 +41,20 @@ export default function RootLayout({ children }: RootLayoutProps) {
         <head />
         <body
           className={cn(
-            "min-h-screen bg-purple-600 font-sans antialiased",
+            "min-h-screen bg-white font-sans antialiased",
             fontSans.variable
           )}
         >
+          <UserContextProvider>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <div className="relative flex min-h-screen flex-col">
               {/* <SiteHeader /> */}
               <div className="flex-1">{children}</div>
+              <Toaster />
             </div>
             <TailwindIndicator />
           </ThemeProvider>
+          </UserContextProvider>
         </body>
       </html>
       </ReactQueryProvider>
